@@ -13,7 +13,7 @@ client = MongoClient('mongodb://localhost:27017/')  # Update with your MongoDB c
 db = client['profiledb1']  # Database name
 collection = db['english_learning']  # Collection name
 
-genai.configure(api_key="AIzaSyDt2Sx2tXkU-Y1CfLxI9JEzEcpZuhb1bZ0")
+genai.configure(api_key="")
 def survey_view(request):
     if request.method == 'POST':
         form = SurveyForm(request.POST)
