@@ -1,0 +1,31 @@
+<!-- survey/templates/survey/survey.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Learning Survey</title>
+</head>
+<body>
+    <h1>Why are you learning English?</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label><input type="radio" name="reason_for_learning" value="Prepare for travel"> Prepare for travel</label><br>
+        <label><input type="radio" name="reason_for_learning" value="Just for fun"> Just for fun</label><br>
+        <label><input type="radio" name="reason_for_learning" value="Spend time productively"> Spend time productively</label><br>
+        <label><input type="radio" name="reason_for_learning" value="Connect with people"> Connect with people</label><br>
+        <label><input type="radio" name="reason_for_learning" value="Support my education"> Support my education</label><br>
+        <label><input type="radio" name="reason_for_learning" value="Boost my career"> Boost my career</label><br>
+
+        <h1>How much do you know English?</h1>
+        <label><input type="radio" name="english_level" value="Beginner"> Beginner</label><br>
+        <label><input type="radio" name="english_level" value="Intermediate"> Intermediate</label><br>
+        <label><input type="radio" name="english_level" value="Expert"> Expert</label><br>
+        
+
+        <button type="submit">Submit</button>
+    </form>
+    <button onclick="window.location.href='{% url 'test_view' %}'">Find my level by Test</button>
+</body>
+</html>

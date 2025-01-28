@@ -1,0 +1,280 @@
+<!-- survey/templates/survey/test.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Test</title>
+    <style>
+        .question {
+            margin-bottom: 20px;
+        }
+        .options {
+            margin: 10px 0;
+        }
+        .draggable {
+            display: inline-block;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin: 5px;
+            cursor: move;
+        }
+        .dropzone {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            min-height: 50px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .result {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+<body>
+    <h1>Grammar Assessment Test</h1>
+    <form id="test-form" method="POST" action="#">
+        {% csrf_token %}
+        
+        <div class="question">
+            <h3>1. Parts of Speech (Drag and Drop)</h3>
+            <p>Drag the correct part of speech of the quoted word in the sentence:</p>
+            <p>She spoke "eloquently" about the new project during the meeting.</p>
+            <div class="dropzone" id="dropzone1">Drop here</div>
+            <div class="options">
+                <div class="draggable" draggable="true" ondragstart="drag(event)">Adverb</div>
+                <div class="draggable" draggable="true" ondragstart="drag(event)">Verb</div>
+                <div class="draggable" draggable="true" ondragstart="drag(event)">Noun</div>
+            </div>
+        </div>
+
+        <div class="question">
+            <h3>2. Tenses (MCQ)</h3>
+            <p>Which of the following sentences is in the future perfect tense?</p>
+            <label><input type="radio" name="tense1" value="a"> a) By next year, I will have completed my degree.</label><br>
+            <label><input type="radio" name="tense1" value="b"> b) I will complete my degree next year.</label><br>
+            <label><input type="radio" name="tense1" value="c"> c) I am completing my degree next year.</label>
+        </div>
+
+        <div class="question">
+            <h3>3. Active and Passive Voice (Drag and Drop)</h3>
+            <p>Transform the sentence into passive voice:</p>
+            <p>"The chef prepares the meal every day."</p>
+            <div class="dropzone" id="dropzone2">Drop here</div>
+            <div class="options">
+                <div class="draggable" draggable="true" ondragstart="drag(event)">The meal is prepared by the chef every day.</div>
+                <div class="draggable" draggable="true" ondragstart="drag(event)">The meal prepares by the chef every day.</div>
+                <div class="draggable" draggable="true" ondragstart="drag(event)">The meal was prepared by the chef every day.</div>
+            </div>
+            
+        </div>
+
+        <div class="question">
+            <h3>4. Tenses (MCQ)</h3>
+            <p>Which of these sentences is in the present continuous tense?</p>
+            <label><input type="radio" name="tense2" value="a"> a) She is writing a letter.</label><br>
+            <label><input type="radio" name="tense2" value="b"> b) She wrote a letter.</label><br>
+            <label><input type="radio" name="tense2" value="c"> c) She will write a letter.</label>
+            
+        </div>
+
+        <div class="question">
+            <h3>5. Parts of Speech (Drag and Drop)</h3>
+            <p>Identify the noun, verb, and adjective in the sentence below by dragging the correct words to each category:</p>
+            <p>"The big dog runs quickly in the park."</p>
+            <div class="dropzone" id="verbDropzone">Verb: Drop here</div>
+            <div class="options">
+                <div class="draggable" draggable="true" ondragstart="drag(event)">big</div>
+                <div class="draggable" draggable="true" ondragstart="drag(event)">dog</div>
+                <div class="draggable" draggable="true" ondragstart="drag(event)">runs</div>
+                <div class="draggable" draggable="true" ondragstart="drag(event)">quickly</div>
+            </div>
+            
+        </div>
+
+        <div class="question">
+            <h3>6. Vocabulary (Fill in the Blank)</h3>
+            <p>Choose the correct word to complete the sentence:</p>
+            <p>"The artist's work was considered very ______ for its time."</p>
+            <label><input type="radio" name="vocab1" value="a"> a) modern</label><br>
+            <label><input type="radio" name="vocab1" value="b"> b) outdated</label><br>
+            <label><input type="radio" name="vocab1" value="c"> c) medieval</label>
+            
+        </div>
+
+        <div class="question">
+            <h3>7. Vocabulary (MCQ)</h3>
+            <p>Which word is most similar in meaning to "benevolent"?</p>
+            <label><input type="radio" name="vocab2" value="a"> a) selfish</label><br>
+            <label><input type="radio" name="vocab2" value="b"> b) kind</label><br>
+            <label><input type="radio" name="vocab2" value="c"> c) rude</label>
+            
+        </div>
+
+        <div class="question">
+            <h3>8. Vocabulary (Fill in the Blank)</h3>
+            <p>Choose the correct word to complete the sentence:</p>
+            <p>"His performance was truly ______, receiving praise from all the judges."</p>
+            <label><input type="radio" name="vocab3" value="a"> a) exceptional</label><br>
+            <label><input type="radio" name="vocab3" value="b"> b) ordinary</label><br>
+            <label><input type="radio" name="vocab3" value="c"> c) dismal</label>
+            
+        </div>
+
+        <div class="question">
+            <h3>9. Vocabulary (MCQ)</h3>
+            <p>Which word is the opposite of "optimistic"?</p>
+            <label><input type="radio" name="vocab4" value="a"> a) hopeful</label><br>
+            <label><input type="radio" name="vocab4" value="b"> b) pessimistic</label><br>
+            <label><input type="radio" name="vocab4" value="c"> c) cheerful</label>
+            
+        </div>
+
+        <div class="question">
+            <h3>10. Vocabulary (Fill in the Blank)</h3>
+            <p>Choose the correct word to complete the sentence:</p>
+            <p>"The teacher's ______ was evident in the way she encouraged every student."</p>
+            <label><input type="radio" name="vocab5" value="a"> a) enthusiasm</label><br>
+            <label><input type="radio" name="vocab5" value="b"> b) indifference</label><br>
+            <label><input type="radio" name="vocab5" value="c"> c) apathy</label>
+            
+        </div>
+
+        <button type="submit">Submit Test</button>
+    </form>
+
+    <div id="result" class="result">
+        <h2>Test Results</h2>
+        <p>Your score: <span id="score"></span> out of <span id="total-questions"></span></p>
+        <h3>Correct Answers:</h3>
+        <ul id="correct-answers"></ul>
+        <h3>AI Evaluation:</h3>
+        <p id="evaluation"></p>
+    </div>
+
+    <script>
+        
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.innerHTML);
+        }
+
+        const dropzones = document.querySelectorAll('.dropzone');
+        dropzones.forEach(dropzone => {
+            dropzone.addEventListener('dragover', function(ev) {
+                ev.preventDefault();
+            });
+
+            dropzone.addEventListener('drop', function(ev) {
+                ev.preventDefault();
+                const data = ev.dataTransfer.getData("text");
+                ev.target.innerHTML = data; // Set the dropped text
+            });
+        });
+
+        document.getElementById("test-form").onsubmit = function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            displayResults();
+        };
+        
+        function displayResults() {
+            const userAnswers = {
+                dropzone1: document.getElementById("dropzone1").innerText.trim(),
+                tense1: document.querySelector('input[name="tense1"]:checked') ? document.querySelector('input[name="tense1"]:checked').value : '',
+                dropzone2: document.getElementById("dropzone2").innerText.trim(),
+                tense2: document.querySelector('input[name="tense2"]:checked') ? document.querySelector('input[name="tense2"]:checked').value : '',
+                verbDropzone: document.getElementById("verbDropzone").innerText.trim(),
+                vocab1: document.querySelector('input[name="vocab1"]:checked') ? document.querySelector('input[name="vocab1"]:checked').value : '',
+                vocab2: document.querySelector('input[name="vocab2"]:checked') ? document.querySelector('input[name="vocab2"]:checked').value : '',
+                vocab3: document.querySelector('input[name="vocab3"]:checked') ? document.querySelector('input[name="vocab3"]:checked').value : '',
+                vocab4: document.querySelector('input[name="vocab4"]:checked') ? document.querySelector('input[name="vocab4"]:checked').value : '',
+                vocab5: document.querySelector('input[name="vocab5"]:checked') ? document.querySelector('input[name="vocab5"]:checked').value : '',
+            };
+        
+            const correctAnswers = {
+                dropzone1: "Adverb",
+                tense1: "a",
+                dropzone2: "The meal is prepared by the chef every day.",
+                tense2: "a",
+                verbDropzone: "runs",
+                vocab1: "a",
+                vocab2: "b",
+                vocab3: "a",
+                vocab4: "b",
+                vocab5: "a"
+            };
+
+            let score = 0;
+            for (const key in correctAnswers) {
+                if (userAnswers[key] === correctAnswers[key]) {
+                    score++;
+                }
+            }
+
+            // Display the score and correct answers
+            document.getElementById("score").innerText = score;
+            document.getElementById("total-questions").innerText = Object.keys(correctAnswers).length;
+            
+            const correctAnswersList = document.getElementById("correct-answers");
+            correctAnswersList.innerHTML = ''; // Clear previous answers
+            for (const [question, answer] of Object.entries(correctAnswers)) {
+                const li = document.createElement("li");
+                li.textContent = `${question}: ${answer}`;
+                correctAnswersList.appendChild(li);
+            }
+            
+            let grammarScore = 0;
+            let vocabularyScore = 0;
+        
+            // Calculate scores for grammar (first 5 questions)
+            for (let i = 1; i <= 5; i++) {
+                const answerKey = i === 1 ? "dropzone1" : i === 2 ? "tense1" : i === 3 ? "dropzone2" : i === 4 ? "tense2" : "verbDropzone";
+                if (userAnswers[answerKey] === correctAnswers[answerKey]) {
+                    grammarScore++;
+                }
+            }
+        
+            // Calculate scores for vocabulary (last 5 questions)
+            for (let i = 6; i <= 10; i++) {
+                const answerKey = i === 6 ? "vocab1" : i === 7 ? "vocab2" : i === 8 ? "vocab3" : i === 9 ? "vocab4" : "vocab5";
+                if (userAnswers[answerKey] === correctAnswers[answerKey]) {
+                    vocabularyScore++;
+                }
+            }
+        
+            // AI Evaluation
+            evaluatePerformance(grammarScore, vocabularyScore);
+            document.getElementById("result").style.display = "block"; // Show results
+        }
+        
+        function evaluatePerformance(grammarScore, vocabularyScore) {
+            let evaluationMessage = "User  Analysis: ";
+        
+            // Evaluate Grammar Score
+            if (grammarScore > 3) {
+                evaluationMessage += "Strong points in Grammar. ";
+            } else if (grammarScore === 3) {
+                evaluationMessage += "Intermediate level in Grammar. ";
+            } else {
+                evaluationMessage += "Needs Improvement in Grammar. ";
+            }
+        
+            // Evaluate Vocabulary Score
+            if (vocabularyScore > 3) {
+                evaluationMessage += "Strong points in Vocabulary.";
+            } else if (vocabularyScore === 3) {
+                evaluationMessage += "Intermediate level in Vocabulary.";
+            } else {
+                evaluationMessage += "Needs Improvement in Vocabulary.";
+            }
+        
+            document.getElementById("evaluation").innerText = evaluationMessage;
+        }
+        
+    </script>
+</body>
+</html>
